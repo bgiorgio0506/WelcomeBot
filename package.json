@@ -1,0 +1,20 @@
+{
+  "name": "cactusroleplay",
+  "version": "1.0.0.9",
+  "description": "This BOT is a utility to help the user and the administration Staff of CactusRolePlay [ITA]",
+  "author": "Giorgio Bella",
+  "serverinfo": "Cactus RolePlay[ITA] è un server RP di GTA V che gira sulla piattaforma di FiveM ",
+  "dependencies": {
+    "discord.io": "^2.5.3",
+    "discord.js": "^11.4.2",
+    "mysql": "^2.16.0",
+    "winston": "^3.2.1"
+  },
+  "license": "MIT",
+  "main": "bot.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": []
+}

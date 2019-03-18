@@ -1,0 +1,28 @@
+{
+  "token": "NTQzNTIzNTAyMTUwMzg1NjY2.Dz-HUQ.B_jcudStjlJIMe9Z7AwcB6xcz7w",
+  "prefix" : "!",
+  "message": "Benvenuto in Cactus RolePlay [ITA] ti preghiamo di leggere il regolamento se hai bisogno di supporto contattaci in assistenza ti auguriamo una buona permanenza in quel di Cactus City ",
+  "assistenza":[
+    {
+    "id":"324200993896136704"},
+    {
+      "id":"266288743390904320"},
+    {
+      "id":"147418039929929728"},
+      {
+        "id":"378311307209998346"}
+  ],
+
+  "database" : [
+    {
+      "host":"localhost",
+      "user":"root",
+      "password": "",
+      "dbname" :"discordbot"
+    }
+  ],
+
+  "lang": "it.json",
+  "staffcolor":"2550033",
+  "usercolor":"2550033"
+}
