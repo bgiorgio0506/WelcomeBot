@@ -3,8 +3,7 @@
   const client = new Discord.Client();
   const config = require("./config.json");
   const package = require("./package.json")
-  //const mysql = require("mysql")
-  /*Pik languages*/
+  /*Pick languages*/
   const lang = require(`./lang/${config.lang}`)
 
   //***THIS IS VITAL FOR THE LIFE OF THE BOT***//
@@ -56,7 +55,7 @@
        *get the delete count, as an actual number.
        */
       const deleteCount = parseInt(args[0], 10)
-      if(!deleteCount || deleteCount < 2 || deleteCount > 1000)
+      if(!deleteCount || deleteCount < 2 || deleteCount > 100)
         return message.reply("Please provide a number between 2 and 1000 for the number of messages to delete");
       const fetched = await message.channel.fetchMessages({limit: deleteCount});
       message.channel.bulkDelete(fetched)
