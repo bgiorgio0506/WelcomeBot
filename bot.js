@@ -50,7 +50,7 @@
       const m = await message.channel.send("Ping?");*/
       m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
     }
-    if(command === "delete") {*/
+    if(command === "delete") {
       /* This command removes all messages from all users in the channel, up to 100.
        *get the delete count, as an actual number.
        */
@@ -87,8 +87,20 @@
         }
       }
     });
-    }
-}),
+  }
+  if (command === "restart") {
+    timestamp = new Date();
+    const m = await message.channel.send(`Restarting bot...`);
+    console.log(`Restarting bot....  Bot restart request : ${timestamp}`);
+    message.client.destroy();
+    console.log(`Restarting bot....  Client destroied at : ${timestamp}`);
+    const client = new Discord.Client();
+    console.log(`Restarting bot....  Client Object created at : ${timestamp}`);
+    client.login(config.token).then(console.log(`Restarting bot....  Bot joined at : ${timestamp}`));
+    m.edit(`Bot restarted successfully at ${timestamp}`);
+    console.log(`Bot restart procedure complete at ${timestamp}`);  
+  }
+});
   client.on("guildMemberAdd", (member) => {
     console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
     /*
