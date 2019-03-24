@@ -47,7 +47,7 @@
       /* Calculates ping between sending a message and editing it, giving a nice round-trip latency.
       *The second ping is an average latency between the bot and the websocket server (one-way, not round-trip)
       */
-      const m = await message.channel.send("Ping?");*/
+      const m = await message.channel.send("Ping?");
       m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
     }
     if(command === "delete") {
@@ -98,7 +98,7 @@
     console.log(`Restarting bot....  Client Object created at : ${timestamp}`);
     client.login(config.token).then(console.log(`Restarting bot....  Bot joined at : ${timestamp}`));
     m.edit(`Bot restarted successfully at ${timestamp}`);
-    console.log(`Bot restart procedure complete at ${timestamp}`);  
+    console.log(`Bot restart procedure complete at ${timestamp}`);
   }
 });
   client.on("guildMemberAdd", (member) => {
