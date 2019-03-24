@@ -72,12 +72,8 @@
           title: "**Cactus RolePlay** Statistiche",
           thumbnail:
               {
-                url: "https://cdn.discordapp.com/embed/avatars/0.png"
+                url: client.user.avatarURL
             },
-            image:
-                {
-                  url: "https://cdn.discordapp.com/embed/avatars/0.png"
-              },
         timestamp: new Date(),
          fields:[
            {
@@ -110,7 +106,7 @@
     /*
     adding to the role the person that have joined to server without check
     */
-    member.addRole('485937432408096768').catch(console.error("Error add role function something went wrong"));
+    member.addRole('485937432408096768')//.catch(console.error("Error add role function something went wrong"));
     console.log(`New User "${member.user.username}" added to role Civile`);
 
         member.send({embed:{
