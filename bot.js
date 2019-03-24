@@ -6,6 +6,10 @@
   /*Pick languages*/
   const lang = require(`./lang/${config.lang}`)
 
+ function getClient() {
+   return client;
+
+ }
   //***THIS IS VITAL FOR THE LIFE OF THE BOT***//
   client.on("ready", () => {
     // This event will run if the bot starts, and logs in, successfully.
@@ -25,11 +29,11 @@
   });
 
   client.on("error", error=>{
+     const client = getClient();
     /*This event should fire after an error; destroy the client and create a new one an log in*/
     var timestamp = new Date();
-    console.error(`Socket Error at ${timestamp} error is : ${error} ---The bot will reconnect...`);
+    console.error(`Socket Error at ${timestamp} The bot will reconnect...`);
     client.destroy();
-    const client = new Discord.Client();
     client.login(config.token);
     console.log(`Socket connection reopend at ${timestamp} reconnection successfull`);
   });
@@ -94,8 +98,8 @@
     console.log(`Restarting bot....  Bot restart request : ${timestamp}`);
     message.client.destroy();
     console.log(`Restarting bot....  Client destroied at : ${timestamp}`);
-    const client = new Discord.Client();
-    console.log(`Restarting bot....  Client Object created at : ${timestamp}`);
+    //const client = new Discord.Client();
+    //console.log(`Restarting bot....  Client Object created at : ${timestamp}`);
     client.login(config.token).then(console.log(`Restarting bot....  Bot joined at : ${timestamp}`));
     m.edit(`Bot restarted successfully at ${timestamp}`);
     console.log(`Bot restart procedure complete at ${timestamp}`);
