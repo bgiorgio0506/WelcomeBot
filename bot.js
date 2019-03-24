@@ -97,8 +97,8 @@
     //const client = new Discord.Client();
     //console.log(`Restarting bot....  Client Object created at : ${timestamp}`);
     client.login(config.token).then(console.log(`Restarting bot....  Bot joined at : ${timestamp}`));
-    m.edit(`Bot restarted successfully at ${timestamp}`);
-    console.log(`Bot restart procedure complete at ${timestamp}`);
+    m.edit(`Bot restarted successfully at ${timestamp} await ready event`);
+    console.log(`Bot restart procedure complete at ${timestamp} waiting ready event to fire...`);
   }
 });
   client.on("guildMemberAdd", (member) => {
@@ -119,7 +119,7 @@
             text: "© Cactus RolePlay [ITA] 2019"
           }
         }
-      });
+      }).catch(console.error("Per il si e per il no evito l' eccezione"));
 
         timestamp = new Date();
         console.log(`"Welcome message sent at "${timestamp}`);
