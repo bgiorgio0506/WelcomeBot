@@ -1,10 +1,11 @@
   // Load up the discord.js library
   const Discord = require("discord.js");
   const client = new Discord.Client();
+  const events = require ("events");
+  const event = new events;
   const config = require("./config.json");
-  const package = require("./package.json")
-  /*Pick languages*/
-  const lang = require(`./lang/${config.lang}`)
+  const package = require("./package.json");
+
 
  function getClient() {
    return client;
@@ -22,21 +23,22 @@
   });
 
   client.on("guildDelete", guild => {
-    /*Say who banned the bot... Go to the admin who banned the bot
+    /* Go to the admin who banned the bot
     * and remove he from is admin position ;)
     */
     console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
   });
 
   client.on("error", error=>{
-     const client = getClient();
+    const client = getClient();
     /*This event should fire after an error; destroy the client and create a new one an log in*/
     var timestamp = new Date();
-    console.error(`Socket Error at ${timestamp} The bot will reconnect...`);
-    client.destroy();
-    client.login(config.token);
+    console.log(`Socket Error at ${timestamp} The bot will reconnect...`);
+    console.log(`Socket error: ${error}`)
+    client.destroy().catch(console.error)
+    client.login(config.token).catch(console.error);
     console.log(`Socket connection reopend at ${timestamp} reconnection successfull`);
-  });
+});
 
   client.on("message", async message => {
     //Ignore bot
@@ -60,7 +62,7 @@
        */
       const deleteCount = parseInt(args[0], 10)
       if(!deleteCount || deleteCount < 2 || deleteCount > 100)
-        return message.reply("Please provide a number between 2 and 1000 for the number of messages to delete");
+        return message.reply("Please provide a number between 2 and 100 for the number of messages to delete");
       const fetched = await message.channel.fetchMessages({limit: deleteCount});
       message.channel.bulkDelete(fetched)
         .catch(error => message.reply(`Couldn't delete messages because of: ${error}`));
@@ -69,7 +71,7 @@
       const m = await message.channel.send(`Fetching data...`);
       m.edit({embed:{
           color: 3447003,
-          title: "**Cactus RolePlay** Statistiche",
+          title: "**Server [name]** Statistiche",
           thumbnail:
               {
                 url: client.user.avatarURL
@@ -83,47 +85,64 @@
          ],
         footer: {
           icon_url: client.user.avatarURL,
-          text: "© Cactus RolePlay [ITA] 2019"
+          text: "© Server [name]  2019"
         }
       }
     });
-  }
-  if (command === "restart") {
+
+    }
+     if (command === "restart") {
     timestamp = new Date();
     const m = await message.channel.send(`Restarting bot...`);
     console.log(`Restarting bot....  Bot restart request : ${timestamp}`);
-    message.client.destroy();
+    message.client.destroy().catch(console.error);
     console.log(`Restarting bot....  Client destroied at : ${timestamp}`);
-    //const client = new Discord.Client();
-    //console.log(`Restarting bot....  Client Object created at : ${timestamp}`);
-    client.login(config.token).then(console.log(`Restarting bot....  Bot joined at : ${timestamp}`));
+    client.login(config.token).then(console.log(`Restarting bot....  Bot joined at : ${timestamp}`)).catch(console.error);
     m.edit(`Bot restarted successfully at ${timestamp} await ready event`);
     console.log(`Bot restart procedure complete at ${timestamp} waiting ready event to fire...`);
   }
+
+  if (command === "restarth") {
+        console.log('Fired');
+        const m = await message.channel.send("Handling your request with the server");
+        event.emit('restartHandling');
+      }
 });
+  //When a member join
   client.on("guildMemberAdd", (member) => {
     console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
     /*
     adding to the role the person that have joined to server without check
     */
-    member.addRole('485937432408096768')//.catch(console.error("Error add role function something went wrong"));
-    console.log(`New User "${member.user.username}" added to role Civile`);
+    //try{
+    	member.addRole(roleID).catch(console.error)
+    //}
+    //catch(error){
+    	//console.log("Error 404 no user found ")
+    //}
+
+
+    console.log("Member added to role");
 
         member.send({embed:{
             color: 3447003,
-            title: "**Cactus RolePlay[ITA]** Welcome Bot!",
+            title: "**Server [name]** Welcome Bot!",
             description: config.message,
           timestamp: new Date(),
           footer: {
             icon_url: client.user.avatarURL,
-            text: "© Cactus RolePlay [ITA] 2019"
+            text: "© Server [name] 2019"
           }
         }
-      }).catch(console.error("Per il si e per il no evito l' eccezione"));
-
+      }).catch(console.error)
+        /*//handle the error
+        catch(error){
+        	console.log("Error 404 no user found ")
+        }*/
         timestamp = new Date();
         console.log(`"Welcome message sent at "${timestamp}`);
   });
+
 
 
   client.login(config.token);

@@ -1,8 +1,6 @@
 {
-  "token": "NTQzNTIzNTAyMTUwMzg1NjY2.Dz-HUQ.B_jcudStjlJIMe9Z7AwcB6xcz7w",
+  "token": "Your token here",
   "prefix" : "!",
-  "message": "Benvenuto in Cactus RolePlay [ITA] ti preghiamo di leggere il regolamento se hai bisogno di supporto contattaci in assistenza ti auguriamo una buona permanenza in quel di Cactus City ",
-  "lang": "it.json",
-  "staffcolor":"2550033",
-  "usercolor":"2550033"
+  "message": "Your Welcome Message",
+  "roleID" : " '485937432408096768' "
 }
