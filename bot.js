@@ -1,12 +1,10 @@
   // Load up the discord.js library
   const Discord = require("discord.js");
   const client = new Discord.Client();
-  const events = require ("events");
-  const event = new events;
   const config = require("./config.json");
   const package = require("./package.json");
 
-
+//just passing an outside const for the restart from crash capability 
  function getClient() {
    return client;
 
@@ -91,36 +89,24 @@
     });
 
     }
-     if (command === "restart") {
-    timestamp = new Date();
-    const m = await message.channel.send(`Restarting bot...`);
-    console.log(`Restarting bot....  Bot restart request : ${timestamp}`);
-    message.client.destroy().catch(console.error);
-    console.log(`Restarting bot....  Client destroied at : ${timestamp}`);
-    client.login(config.token).then(console.log(`Restarting bot....  Bot joined at : ${timestamp}`)).catch(console.error);
-    m.edit(`Bot restarted successfully at ${timestamp} await ready event`);
-    console.log(`Bot restart procedure complete at ${timestamp} waiting ready event to fire...`);
+    if (command === "restart") {
+        timestamp = new Date();
+        const m = await message.channel.send(`Restarting bot...`);
+        console.log(`Restarting bot....  Bot restart request : ${timestamp}`);
+        message.client.destroy().catch(console.error);
+        console.log(`Restarting bot....  Client destroied at : ${timestamp}`);
+        client.login(config.token).then(console.log(`Restarting bot....  Bot joined at : ${timestamp}`)).catch(console.error);
+        m.edit(`Bot restarted successfully at ${timestamp} await ready event`);
+        console.log(`Bot restart procedure complete at ${timestamp} waiting ready event to fire...`);
   }
 
-  if (command === "restarth") {
-        console.log('Fired');
-        const m = await message.channel.send("Handling your request with the server");
-        event.emit('restartHandling');
-      }
-});
   //When a member join
   client.on("guildMemberAdd", (member) => {
     console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
     /*
     adding to the role the person that have joined to server without check
     */
-    //try{
-    	member.addRole(roleID).catch(console.error)
-    //}
-    //catch(error){
-    	//console.log("Error 404 no user found ")
-    //}
-
+    member.addRole(roleID).catch(console.error)
 
     console.log("Member added to role");
 
@@ -135,10 +121,6 @@
           }
         }
       }).catch(console.error)
-        /*//handle the error
-        catch(error){
-        	console.log("Error 404 no user found ")
-        }*/
         timestamp = new Date();
         console.log(`"Welcome message sent at "${timestamp}`);
   });
